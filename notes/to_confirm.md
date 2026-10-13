@@ -413,7 +413,8 @@ Last run: 2026-10-13 with `python3 scripts/validate.py`.
 - [ ] `brand-hub-workshops`: no official URL
 - [ ] `brand-hub`: no official URL
 
-**URL check: 8 of 229 URLs did not return a success response.** Open each in a browser. If it works, leave it. If it is broken, find the new page and update `url` or `source_urls`.
+**URL check: 9 of 229 URLs did not return a success response.** Open each in a browser. If it works, leave it. If it is broken, find the new page and update `url` or `source_urls`.
+- [ ] https://alchemyfoundry.com/ returned redirects to a domain-for-sale page (https://www.hugedomains.com/domain_profile.cfm?d=alchemyfoun). Used by `alchemy-foundry` (source_urls)
 - [ ] https://cancer.illinois.edu/biomedical-research-center/ returned 404. Used by `cancer-center-at-illinois` (source_urls), `translational-research-facility` (source_urls)
 - [ ] https://corporaterelations.illinois.edu/news/hub-brand-innovation-and-advertising-technology-center-advertising-innovation returned 403 (likely blocks automated requests; open it in a browser). Used by `brand-hub` (source_urls)
 - [ ] https://grainger.illinois.edu/news/stories/29522 returned 404. Used by `ew-aware` (source_urls)

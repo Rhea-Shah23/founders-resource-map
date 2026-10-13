@@ -5,7 +5,8 @@ Usage:
     python3 scripts/validate.py            # structure checks + live URL checks
     python3 scripts/validate.py --no-urls  # structure checks only (fast, offline)
 
-Writes the results into the AUTO-VALIDATION section of notes/to_confirm.md.
+A full run writes the results into the AUTO-VALIDATION section of notes/to_confirm.md.
+A --no-urls run only prints them.
 Exits with code 1 if any structural error is found (URL failures are reported
 for humans to check but do not fail the run, since some sites block scripts).
 """
@@ -233,7 +234,8 @@ def main():
     errors, warnings = check_rows(rows)
     urls_checked = "--no-urls" not in sys.argv
     url_total, url_failures = check_urls(rows) if urls_checked else (0, [])
-    write_report(errors, warnings, url_total, url_failures, urls_checked)
+    if urls_checked:  # a quick --no-urls run leaves the last full report in place
+        write_report(errors, warnings, url_total, url_failures, urls_checked)
     print(f"{len(rows)} rows. {len(errors)} errors, {len(warnings)} warnings.")
     if urls_checked:
         print(f"URLs: {url_total} checked, {len(url_failures)} failed.")

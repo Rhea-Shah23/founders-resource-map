@@ -80,6 +80,7 @@ function check(cond, msg) {
   // Detail panel
   await page.locator(".card h3 button").first().click();
   await page.waitForSelector("dialog[open]");
+  await page.waitForTimeout(400); // let the slide-in finish
   const title = await page.textContent("#dTitle");
   check(title.length > 0, `detail panel opens for "${title}"`);
   await page.screenshot({ path: path.join(shots, "desktop-detail.png") });
@@ -96,6 +97,7 @@ function check(cond, msg) {
   await m.screenshot({ path: path.join(shots, "mobile.png") });
   await m.locator(".card h3 button").first().click();
   await m.waitForSelector("dialog[open]");
+  await m.waitForTimeout(400);
   await m.screenshot({ path: path.join(shots, "mobile-detail.png") });
 
   // External resources (Google Fonts) may fail offline; that is not a page error.

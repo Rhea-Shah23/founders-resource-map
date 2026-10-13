@@ -122,6 +122,7 @@ select { appearance: none; padding-right: 34px;
 }
 .tab:hover { color: var(--navy); }
 .tab[aria-selected=true] { color: var(--navy); border-bottom-color: var(--orange); }
+@media (min-width: 900px) { .tabs { flex-wrap: wrap; overflow: visible; } }
 .tab .count { display: inline-block; min-width: 26px; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: var(--gray-soft); color: var(--navy); font-size: 13px; text-align: center; }
 .tab[aria-selected=true] .count { background: var(--navy); color: #fff; }
 
@@ -197,7 +198,7 @@ dialog.detail[open] { animation: slide .18s ease-out; }
 @media (prefers-reduced-motion: reduce) { dialog.detail[open], .card { animation: none; transition: none; } }
 .detail-inner { display: flex; flex-direction: column; height: 100%; }
 .detail-head { background: var(--navy); color: #fff; padding: calc(env(safe-area-inset-top, 0px) + 20px) 22px 20px; position: relative; }
-.detail-head .cat { color: var(--orange); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.detail-head .cat { margin-right: 48px; color: var(--orange); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .detail-head h2 { font-family: var(--display); font-size: 28px; line-height: 1.1; margin: 6px 44px 10px 0; }
 .detail-head .close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 14px); right: 14px; width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.4); background: transparent; color: #fff; font-size: 22px; cursor: pointer; }
 .detail-head .close:hover { background: rgba(255,255,255,.12); }
