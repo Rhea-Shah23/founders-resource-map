@@ -684,17 +684,21 @@
       '<article class="d" data-c="' + r.code + '">' +
       '<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="' + esc(lastListHash) + '">' + (lastListHash.indexOf("#/calendar") === 0 ? "Calendar" : "Directory") +
       '</a></li><li><a href="' + esc(catHash) + '">' + esc(r.category) + '</a></li><li aria-current="page">' + esc(r.name) + "</li></ol></nav>" +
-      '<header class="d-head' + (arriving ? " is-arriving" : "") + '">' +
+      '<header class="d-head' + (arriving ? " is-arriving" : "") + '"><div class="d-head-main">' +
       '<p class="d-no"><span class="d-num">No. ' + r.no + "</span>" + catTag(r) + "</p>" +
       '<h1 class="d-title" tabindex="-1">' + esc(r.name) + "</h1>" +
       '<p class="d-tagline">' + esc(r.tagline) + "</p>" +
       '<p class="d-badges"><span class="badge badge--' + r.status.toLowerCase() + '">' + STATUS_TEXT[r.status] + "</span>" +
       (r.needs_confirmation ? '<span class="badge badge--unverified">Unverified</span>' : '<span class="badge badge--verified">' + icon("check") + "Verified</span>") +
-      (!r.on_university_map ? '<span class="badge badge--added">Added by Founders</span>' : "") + "</p></header>" +
+      (!r.on_university_map ? '<span class="badge badge--added">Added by Founders</span>' : "") + "</p></div>" +
+      '<div class="glance"><div class="glance-dl">' + deadlineCell(r) + "</div>" +
+      (link && r.application_method !== "Not applicable" ? '<a class="btn btn--primary" href="' + esc(link) + '" target="_blank" rel="noopener">' + esc(CTA[r.application_method] || "Visit the official page") + icon("arrow") + "</a>" : "") +
+      '<p class="glance-how">' + (r.apply_steps.length ? plural(r.apply_steps.length, "step") + " to apply. " : "") + '<a href="#how">How to apply</a></p></div>' +
+      "</header>" +
       '<div class="d-grid"><div class="d-main">' +
       '<section class="d-block d-summary" aria-label="Summary"><dl>' +
       row("What it is", esc(r.what_it_is)) + row("Who should apply", esc(r.who_should_apply)) + row("Choose this if", esc(r.choose_this_if)) + "</dl></section>" +
-      '<section class="d-block d-apply"><h2 class="d-h">How to apply</h2>' +
+      '<section class="d-block d-apply" id="how"><h2 class="d-h">How to apply</h2>' +
       '<p class="method">' + icon(METHOD_ICON[r.application_method] || "unknown") + "<span>" + esc(methodLine) + "</span></p>" +
       steps + noSteps + '<div class="cta-row">' + cta + second + "</div>" + mail + "</section>" +
       '<section class="d-block d-details"><h2 class="d-h">Details</h2>' + details + "</section>" +
@@ -895,6 +899,13 @@
           hits[0].scrollIntoView({ block: "center", behavior: reduceMotion() ? "auto" : "smooth" });
           hits.forEach(function (h) { h.classList.remove("is-flash"); void h.offsetWidth; h.classList.add("is-flash"); });
         }
+        return;
+      }
+      var jump = e.target.closest('a[href="#how"]');
+      if (jump) {
+        e.preventDefault();
+        var tgt = $("#how");
+        if (tgt) tgt.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
         return;
       }
       var internal = e.target.closest('a[href^="#/"]');
