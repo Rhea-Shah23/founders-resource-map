@@ -528,34 +528,44 @@ body.is-settled .rows, body.is-settled .cal-body, body.is-settled .d { animation
 
 /* ---------- Print: one clean page for a single resource ---------- */
 @media print {
-  @page { margin: 14mm 16mm; }
-  body { background: #fff; font-size: 10.5pt; }
-  .mast, .bar, .controls, .foot, .crumbs, .d-related, .cta-row .ico, [data-ics], .skip, .correct { display: none !important; }
+  @page { size: letter; margin: 8mm 12mm; }
+  body { background: #fff; font-size: 9pt; line-height: 1.35; }
+  .mast, .bar, .controls, .foot, .crumbs, .d-related, .glance, .link-quiet, .cta-row .ico, [data-ics], .skip, .correct,
+  .sources, .sources-h, .d-details .kv:has(.tags), .method .ico, .kv[data-k="Confidence"], .kv[data-k="On the University map"],
+  .d-details .kv[data-k="Type"], .kv[data-k="Repeats"], .kv[data-k="Type"] { display: none !important; }
   body:not([data-view="resource"]) main::before { content: "Open a single resource to print a handout."; }
   #detail { padding: 0; }
-  .d-head { padding-bottom: 10pt; border-bottom: 1.5pt solid #000; }
-  .d-no::before { content: "Founders Field Guide"; font: 600 8pt/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; margin-right: 8pt; }
-  .d-title { font-size: 26pt; max-width: none; }
-  .d-tagline { font-size: 13pt; margin: 6pt 0 8pt; }
-  .d-grid { display: block; margin-top: 12pt; }
-  .d-aside { position: static; display: block; }
-  .d-dates { background: none; border: 1pt solid #000; padding: 8pt 10pt; margin-bottom: 12pt; break-inside: avoid; }
-  .d-block + .d-block { margin-top: 12pt; }
-  .d-summary .kv { grid-template-columns: 110pt 1fr; padding: 5pt 0; gap: 10pt; }
-  .d-summary dd { font-size: 11.5pt; }
-  .steps li { font-size: 11pt; padding: 2pt 0; }
-  .steps li::before { background: #000; width: 18pt; height: 18pt; }
-  .btn--primary { background: none; border: 0; padding: 0; min-height: 0; font-size: 10.5pt; color: #000; width: auto; justify-content: flex-start; }
-  .btn--primary::after, .link-quiet::after { content: ": " attr(href); font: 400 9pt var(--mono); }
-  .kv-list .kv { padding: 3pt 0; grid-template-columns: 90pt 1fr; }
-  .sources { font-size: 8pt; }
-  .sources a::after { content: " " attr(href); }
-  .sources a { text-decoration: none; }
-  .sources a { font-size: 0; }
-  .sources a::after { font-size: 8pt; }
-  .notice { border: 1pt dashed #000; }
-  .d-details .tags, .d-sources .kv-list { display: none; }
-  .print-foot { display: block; margin-top: 14pt; padding-top: 6pt; border-top: .75pt solid #000; font-size: 8pt; }
+  .d-head { display: block; padding-bottom: 8pt; border-bottom: 1.5pt solid #000; }
+  .d-no { margin-bottom: 4pt; }
+  .d-no::before { content: "Founders Field Guide"; font: 600 7.5pt/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; margin-right: 8pt; }
+  .d-title { font-size: 22pt; max-width: none; }
+  .d-tagline { font-size: 12pt; margin: 4pt 0 6pt; }
+  .badge { min-height: 0; padding: 2pt 5pt; font-size: 7pt; }
+  .d-grid { display: flex; flex-direction: column; gap: 7pt; margin-top: 7pt; }
+  .d-main, .d-aside { display: contents; }
+  .d-block + .d-block { margin-top: 0; }
+  .d-summary { order: 1; } .d-dates { order: 2; } .d-apply { order: 3; } .d-details { order: 4; } .d-sources { order: 5; }
+  .d-h { margin-bottom: 4pt; padding-bottom: 2pt; font-size: 7pt; }
+  .d-summary .kv { grid-template-columns: 96pt 1fr; padding: 3pt 0; gap: 8pt; }
+  .d-summary dt { font-size: 7pt; }
+  .d-summary dd { font-size: 9.5pt; line-height: 1.3; }
+  .d-dates { background: none !important; border: .75pt solid #000; padding: 6pt 8pt; break-inside: avoid; }
+  .kd-big { flex-direction: row; align-items: baseline; gap: 8pt; margin-bottom: 4pt; }
+  .kd-big time { font-size: 13pt; }
+  .kd-note { font-size: 8pt; line-height: 1.35; margin: 4pt 0 0; }
+  .d-aside .kv-list .kv, .kv-list .kv { padding: 2pt 0; grid-template-columns: 80pt 1fr; gap: 6pt; }
+  .kv-list dt { font-size: 7pt; }
+  .method { font-size: 10pt; margin-bottom: 3pt; }
+  .steps { margin-bottom: 4pt; }
+  .steps li { font-size: 9.5pt; padding: 1pt 0; grid-template-columns: 16pt 1fr; gap: 6pt; }
+  .steps li::before { background: #000 !important; color: #fff; width: 14pt; height: 14pt; font-size: 7.5pt; }
+  .btn--primary { background: none !important; border: 0 !important; padding: 0; min-height: 0; font-size: 9.5pt; color: #000 !important; width: auto; justify-content: flex-start; }
+  .btn--primary::after { content: ": " attr(href); font: 400 8pt var(--mono); overflow-wrap: anywhere; }
+  .contact { margin-top: 3pt; }
+  .notice { border: .75pt dashed #000; padding: 3pt 6pt; margin-bottom: 4pt; font-size: 8pt; background: none; }
+  .notice p { display: none; }
+  .notice::before { content: "Needs confirmation: some details have not been checked by a person yet. Confirm on the official page."; }
+  .print-foot { display: block; margin-top: 6pt; padding-top: 3pt; border-top: .75pt solid #000; font-size: 7.5pt; }
   a { color: #000; text-decoration: none; }
   * { animation: none !important; box-shadow: none !important; }
 }
@@ -1272,7 +1282,7 @@ body.is-settled .rows, body.is-settled .cal-body, body.is-settled .d { animation
   }
 
   /* ---------- Resource page ---------- */
-  function row(label, html) { return html ? '<div class="kv"><dt>' + label + "</dt><dd>" + html + "</dd></div>" : ""; }
+  function row(label, html) { return html ? '<div class="kv" data-k="' + label + '"><dt>' + label + "</dt><dd>" + html + "</dd></div>" : ""; }
   var STATUS_TEXT = { Active: "Active", Inactive: "Inactive", Unknown: "Status unknown" };
   var TYPE_TEXT = { Confirmed: "Confirmed date", Typical: "Typical timing, date not yet posted", Rolling: "Rolling admissions",
     "None published": "No deadline published", Unknown: "Date to be confirmed" };
@@ -1480,7 +1490,10 @@ body.is-settled .rows, body.is-settled .cal-body, body.is-settled .d { animation
     // Category tabs with roving focus
     $("#tabs").addEventListener("click", function (e) {
       var b = e.target.closest(".tab");
-      if (b) setFilters({ cat: b.getAttribute("data-cat") });
+      if (!b) return;
+      setFilters({ cat: b.getAttribute("data-cat") });
+      var sel = $('.tab[aria-selected="true"]');
+      if (sel) sel.focus({ preventScroll: true });
     });
     $("#tabs").addEventListener("keydown", function (e) {
       var tabs = $$(".tab", e.currentTarget), i = tabs.indexOf(document.activeElement);
@@ -1491,6 +1504,7 @@ body.is-settled .rows, body.is-settled .cal-body, body.is-settled .d { animation
       j = (j + tabs.length) % tabs.length;
       setFilters({ cat: tabs[j].getAttribute("data-cat") });
       $$(".tab")[j].focus();
+      $$(".tab")[j].scrollIntoView({ block: "nearest", inline: "nearest" });
     });
 
     $("#filtersToggle").addEventListener("click", function (e) {

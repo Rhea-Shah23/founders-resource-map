@@ -593,7 +593,7 @@
   }
 
   /* ---------- Resource page ---------- */
-  function row(label, html) { return html ? '<div class="kv"><dt>' + label + "</dt><dd>" + html + "</dd></div>" : ""; }
+  function row(label, html) { return html ? '<div class="kv" data-k="' + label + '"><dt>' + label + "</dt><dd>" + html + "</dd></div>" : ""; }
   var STATUS_TEXT = { Active: "Active", Inactive: "Inactive", Unknown: "Status unknown" };
   var TYPE_TEXT = { Confirmed: "Confirmed date", Typical: "Typical timing, date not yet posted", Rolling: "Rolling admissions",
     "None published": "No deadline published", Unknown: "Date to be confirmed" };
@@ -801,7 +801,10 @@
     // Category tabs with roving focus
     $("#tabs").addEventListener("click", function (e) {
       var b = e.target.closest(".tab");
-      if (b) setFilters({ cat: b.getAttribute("data-cat") });
+      if (!b) return;
+      setFilters({ cat: b.getAttribute("data-cat") });
+      var sel = $('.tab[aria-selected="true"]');
+      if (sel) sel.focus({ preventScroll: true });
     });
     $("#tabs").addEventListener("keydown", function (e) {
       var tabs = $$(".tab", e.currentTarget), i = tabs.indexOf(document.activeElement);
@@ -812,6 +815,7 @@
       j = (j + tabs.length) % tabs.length;
       setFilters({ cat: tabs[j].getAttribute("data-cat") });
       $$(".tab")[j].focus();
+      $$(".tab")[j].scrollIntoView({ block: "nearest", inline: "nearest" });
     });
 
     $("#filtersToggle").addEventListener("click", function (e) {
