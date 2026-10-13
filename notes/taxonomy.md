@@ -39,6 +39,29 @@ Each resource gets exactly one category: the one a student would look under firs
   networks that mostly serve faculty or staff. Their descriptions say plainly what a student can
   actually get from them.
 
+### Category codes on the site
+
+Round 2 kept the same 11 categories. The site labels each one with a short name and a
+two-letter code, so category is never shown by color alone. The codes appear on tabs,
+calendar markers, and the agenda. They are display-only and are not stored in the CSV.
+
+| Code | Short name | Category |
+|---|---|---|
+| CP | Competitions | Pitch Competitions & Challenges |
+| AC | Accelerators | Accelerators & Incubators |
+| FN | Funding | Funding & Grants |
+| CR | Courses | Courses & Training |
+| FL | Fellowships | Fellowships & Internships |
+| MK | Maker spaces | Maker Spaces & Labs |
+| SO | Student orgs | Student Organizations |
+| EV | Events | Events & Community |
+| AD | Advising | Advising & Legal/IP |
+| HB | Campus hubs | Campus Hubs |
+| EX | Partners | External Partners |
+
+To add or rename a category, change `CATEGORIES` in `scripts/build.py`, the `CAT` table in
+`scripts/site/app.js`, and the `--c-XX` color in `scripts/site/styles.css` together.
+
 ## Subcategory
 
 Free text, short, for nuance within a tab (for example "Engineering startup competition").
@@ -84,6 +107,8 @@ On the site, filtering by a stage also shows resources marked `Any`.
 
 `UIUC` (on campus), `CU` (Champaign-Urbana, off campus), `Chicago`, `National`, `Online`.
 
-## Status, recurrence, eligibility, confidence
+## Status, recurrence, eligibility, confidence, application method, deadline type
 
-See `schema.md` for allowed values and the evidence rules for each.
+See `schema.md` for allowed values and the evidence rules for each. On the site, filtering by
+stage also includes `Any`. The deadline filter groups entries by `next_deadline` ranges and by
+`deadline_type` (Rolling, None published, and Typical or Unknown as "Date to be confirmed").

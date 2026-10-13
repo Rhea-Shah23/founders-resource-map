@@ -103,23 +103,24 @@ status and a note. Status is `Inactive` only where an official page says the pro
 | Evergreen Fund (Illinois Ventures) | No official page mentions it. Merged into Illinois Ventures pending confirmation | (merged) | https://illinoisventures.com/ |
 | Illinois Reboot Tech Training | Research Park says it has been retired | Inactive | https://researchpark.illinois.edu/all-events/ilreboot/ |
 | Innovation Celebration | Last held 2019; 2020 edition postponed indefinitely | Inactive | https://innovationcelebration.com/ |
-| Pygmalion Tech Festival | Festival is active (Sept 24 to 27, 2026) but the tech track appears only in 2016 to 2019 sources | Active (festival) | https://thisispygmalion.com/ |
+| Pygmalion Tech Festival | The 2026 festival ran Sept 24 to 27, but the tech track appears only in 2016 to 2019 sources. Round 2 set status to Unknown because the 2026 edition is over and no 2027 dates are posted | Unknown | https://thisispygmalion.com/ |
 | Champaign-Urbana CEO Roundtable | Now called the CEO and Founders Roundtable | Unknown | https://researchpark.illinois.edu/all-events/ceo-founders-roundtable/ |
-| AWARE seed grants & mentoring | Official page returns 404; not on current Research Park resources | Unknown | https://researchpark.illinois.edu/AWARE (404) |
-| I-Start Accelerator Program | Only source is a 2011 pilot announcement | Unknown | https://researchpark.illinois.edu/i-start-program-launching-soon-il-dceo-awards-grant-funding/ |
+| AWARE seed grants & mentoring | Round 2: the old Research Park page is gone, but AWARE now lives at the Landuyt Center as starter courses, advising, small Maker Money grants, and prizes for early Cozad teams. Row renamed and re-pointed; whether it is the direct successor is still to confirm | Active (Medium confidence) | https://landuyt.illinois.edu/programs/aware |
+| I-Start Accelerator Program | Only source is a 2011 pilot announcement; round 2 found it missing from the 2026 list of EnterpriseWorks programs. Recommend removing | Unknown | https://researchpark.illinois.edu/i-start-program-launching-soon-il-dceo-awards-grant-funding/ |
 | FAST Center SBIR & STTR Assistance | Link from the incubator page returns 404; working page is `/resources/illinois-fast-center/` | Unknown | https://researchpark.illinois.edu/resources/illinois-fast-center/ |
-| Alchemy Technology Foundry | `alchemyfoundry.com` redirects to a domain-for-sale page; not on current Landuyt pages | Unknown | https://alchemyfoundry.com/ |
+| Alchemy Technology Foundry | `alchemyfoundry.com` redirects to a domain-for-sale page; not on current Landuyt pages; round 2 found its director now listed as emeritus | Unknown | https://alchemyfoundry.com/ |
 | Innovation Expo | No listings after 2020 | Unknown | https://calendars.illinois.edu/detail/7/33389506 |
 | Brand Hub (and its certificates and workshops) | `brandhub.illinois.edu` does not resolve; newest items about 2023 to 2024 | Unknown | DNS failure on 2026-10-13 |
 | Kleinmuntz Center (IGB) | No news after 2022 | Unknown | https://kleinmuntzcenter.illinois.edu/ |
 | SCD Assessment & Research Lab | Now called the Assessment and Research team | Unknown | https://designcenter.illinois.edu/research |
 | SCD Scholars & Fellows | No Fellows program found; scholar program now called Research and Practice Scholars | Unknown | https://designcenter.illinois.edu/aboutscd/ExperientiallLearning/researchscholars |
 | IDEA Lab | Official expansion is now "Innovation and Design in Engineering and the Arts" | Unknown | https://www.library.illinois.edu/enx/idea-lab/about/ |
-| Startup City Scholars | Not on the current City Scholars site; last seen in March 2025 news | Active (City Scholars) | https://cityscholars.grainger.illinois.edu/ |
+| Startup City Scholars | Not on the current City Scholars site; its apply page now returns 404. Round 2 renamed the row to City Scholars | Active (City Scholars) | https://cityscholars.grainger.illinois.edu/ |
 | Duality Quantum Accelerator | Site says Alchemist Chicago now includes Duality | Active | https://www.dualityaccelerator.com/ |
 | Illinois Ag Tech Accelerator | Latest cohort found is 2023; gener8tor's agtech page returns 404 | Unknown | https://researchpark.illinois.edu/illinois-agtech-accelerator-launches-fifth-cohort-with-five-startups-2/ |
 | Illinois University Incubator Network | Research Park page returns 404; no activity after 2024 | Unknown | https://illinoisincubators.org/ |
 | Translational Research Facility | No UIUC facility by this name found | Unknown | https://medicine.illinois.edu/research/facilities |
 | Catalyze, ThinkChicago, ELLC Roundtable, EILC | Newest dated activity is 2022 to 2024 | Unknown | see each row's `source_urls` |
 | Zero2One | Site content stops at Fall 2024; one LinkedIn page marked inactive | Unknown | https://www.zero2onevc.com/ |
+| Polsky Center (College New Venture Challenge) | Round 2: UIUC Startup City Scholars students could enter the CNVC in 2024 to 25, but the Nov 2025 and Feb 2026 announcements limit it to returning UChicago undergrads | Active (UChicago-focused) | https://polsky.uchicago.edu/ |
 | OTCR Consulting, Founders | Old domains are broken (`otcr.illinois.edu` does not resolve; `founders.illinois.edu` has a certificate error). Rows point to current RSO or Gies pages | Unknown | https://one.illinois.edu/FoundersIllinoisEntrepreneurs/ |
