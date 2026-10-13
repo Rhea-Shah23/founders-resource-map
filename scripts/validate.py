@@ -109,6 +109,13 @@ def check_rows(rows):
                 errors.append(f"{where}: next_deadline {nd!r} is not an ISO date")
             elif d < today:
                 warnings.append(f"{where}: next_deadline {nd} has passed. Update or clear it")
+        ld = r.get("last_deadline", "")
+        if ld:
+            lde = parse_iso(ld)
+            if not lde:
+                errors.append(f"{where}: last_deadline {ld!r} is not an ISO date")
+            elif lde > today:
+                errors.append(f"{where}: last_deadline {ld} is in the future (use next_deadline)")
         od = r.get("opens_date", "")
         if od:
             o = parse_iso(od)
@@ -152,7 +159,7 @@ def check_round2(r):
     if cti and not (cti.startswith("You want to") or cti.startswith("You are")):
         out.append('choose_this_if must start with "You want to" or "You are"')
     for f in ("what_it_is", "who_should_apply", "choose_this_if"):
-        v = r.get(f, "")
+        v = re.sub(r"\b(Dr|Mr|Ms|St|vs|e\.g|i\.e|U\.S|[A-Z])\.", "x", r.get(f, ""))
         if v and len(re.findall(r"[.!?](\s|$)", v)) > 1:
             out.append(f"`{f}` should be one sentence")
     for f in USER_FACING:

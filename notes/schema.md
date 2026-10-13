@@ -9,7 +9,8 @@ required. `apply_steps` uses ` | ` instead, because steps are sentences that can
 punctuation. In the JSON, `apply_steps` is an array.
 
 Round 2 (2026-10-13) added `tagline`, `what_it_is`, `who_should_apply`, `choose_this_if`,
-`application_method`, `apply_steps`, `apply_url`, `opens_date`, and `deadline_type`.
+`application_method`, `apply_steps`, `apply_url`, `opens_date`, and `deadline_type`, plus
+`last_deadline` (our addition, so "Recently closed" is driven by data rather than parsed notes).
 
 | Field | Type | Required | Allowed values / format | Airtable type |
 |---|---|---|---|---|
@@ -38,6 +39,7 @@ Round 2 (2026-10-13) added `tagline`, `what_it_is`, `who_should_apply`, `choose_
 | opens_date | date | No | ISO `YYYY-MM-DD`, the date applications open, only when an official page states it | Date (ISO) |
 | next_deadline | date | No | ISO `YYYY-MM-DD`, the next date a student must act by (application, registration, RSVP, nomination). If it is an event date, start `deadline_note` with `Event:` so the site labels it "Next event" | Date (ISO) |
 | deadline_type | enum | Yes | Confirmed, Typical, Rolling, None published, Unknown (definitions below) | Single select |
+| last_deadline | date | No | ISO `YYYY-MM-DD`, the most recent past deadline or event date, only from an official page. Powers the "Recently closed" filter and keeps past dates out of `next_deadline` | Date (ISO) |
 | deadline_note | text | No | context and evidence: past cycles, usual timing, source page | Long text |
 | cost_or_funding | text | No | verified cost, prize, or award facts only | Single line text |
 | student_eligible | enum | Yes | Yes, No, Varies, Unknown | Single select |

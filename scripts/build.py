@@ -25,6 +25,7 @@ FIELDS = [
     "good_for", "category", "subcategory", "parent_org", "location", "tags",
     "ideal_participant", "stage", "url", "contact_email", "application_method", "apply_steps",
     "apply_url", "status", "recurrence", "opens_date", "next_deadline", "deadline_type",
+    "last_deadline",
     "deadline_note", "cost_or_funding", "student_eligible", "on_university_map", "source_urls",
     "last_verified", "confidence", "needs_confirmation", "notes",
 ]
