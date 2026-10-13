@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "data" / "resources.csv"
 RAW_PATH = ROOT / "data" / "raw_map_entries.csv"
 JSON_PATH = ROOT / "data" / "resources.json"
-TEMPLATE = ROOT / "scripts" / "site_template.html"
+SITE_SRC = ROOT / "scripts" / "site"   # index.html, styles.css, app.js
 SITE = ROOT / "docs" / "index.html"
 
 FIELDS = [
@@ -35,6 +35,14 @@ APPLICATION_METHODS = [
     "Contact staff", "Walk-in or open access", "Not applicable", "Unknown",
 ]
 DEADLINE_TYPES = ["Confirmed", "Typical", "Rolling", "None published", "Unknown"]
+
+# Site settings. Set corrections_email to the team's shared inbox to turn the
+# "Suggest a correction" links into prefilled emails; while it is blank they open
+# a prefilled GitHub issue on the repo instead.
+CONFIG = {
+    "repo": "https://github.com/Rhea-Shah23/founders-resource-map",
+    "corrections_email": "",
+}
 
 # Tab order on the site. Must match notes/taxonomy.md.
 CATEGORIES = [
@@ -96,6 +104,7 @@ def main():
         ("data_last_updated", max(verified) if verified else ""),
         ("map_entry_count", map_count),
         ("resource_count", len(resources)),
+        ("config", CONFIG),
         ("categories", CATEGORIES),
         ("application_methods", APPLICATION_METHODS),
         ("deadline_types", DEADLINE_TYPES),
@@ -103,9 +112,12 @@ def main():
     ])
     JSON_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    # Embed the data inline so the page opens by double-click with no server.
+    # Inline the CSS, JS, and data so the page opens by double-click with no server.
     blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-    html = TEMPLATE.read_text(encoding="utf-8").replace("__DATA_JSON__", blob)
+    html = (SITE_SRC / "index.html").read_text(encoding="utf-8")
+    html = html.replace("__CSS__", (SITE_SRC / "styles.css").read_text(encoding="utf-8"))
+    html = html.replace("__JS__", (SITE_SRC / "app.js").read_text(encoding="utf-8"))
+    html = html.replace("__DATA_JSON__", blob)
     SITE.write_text(html, encoding="utf-8")
     print(f"Built {JSON_PATH.relative_to(ROOT)} and {SITE.relative_to(ROOT)} "
           f"({len(resources)} resources, {map_count} map entries)")

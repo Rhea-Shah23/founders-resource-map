@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Founders Field Guide: entrepreneurship resources at Illinois</title>
+<meta name="description" content="A student-run guide to entrepreneurship resources at the University of Illinois Urbana-Champaign: what each one is, who it is for, how to apply, and when it closes.">
+<meta name="theme-color" content="#13294B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+__CSS__
+</style>
+</head>
+<body data-view="directory">
+<a class="skip" href="#main">Skip to the guide</a>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="mast-bar">
+      <span class="mast-org">Founders: Illinois Entrepreneurs</span>
+      <span class="mast-ed">Field Guide <span class="sep">/</span> Fall 2026 edition</span>
+    </div>
+    <h1 class="mast-title">Every entrepreneurship resource at Illinois, in one guide.</h1>
+    <p class="mast-lede">Competitions, funding, labs, clubs, and offices, each with who it is for, how to apply, and when it closes. Kept by students, checked against official pages.</p>
+    <dl class="mast-stats">
+      <div><dt>Resources</dt><dd id="statResources">101</dd></div>
+      <div><dt>University map entries</dt><dd id="statMap">127</dd></div>
+      <div><dt>Added by Founders</dt><dd id="statAdded">8</dd></div>
+      <div><dt>Confirmed dates ahead</dt><dd id="statDated">0</dd></div>
+    </dl>
+    <div class="season" aria-label="Season strip: dated deadlines across the academic year">
+      <div id="strip" class="strip"></div>
+      <p id="stripCap" class="strip-cap"></p>
+    </div>
+  </div>
+</header>
+
+<div class="bar" id="bar">
+  <div class="wrap bar-in">
+    <nav class="views" aria-label="View">
+      <a href="#/" data-viewlink="directory" aria-current="page">Directory</a>
+      <a href="#/calendar" data-viewlink="calendar">Calendar</a>
+    </nav>
+    <form id="searchForm" class="search" role="search">
+      <label for="q" class="vh">Search the guide</label>
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <input id="q" type="search" placeholder="Search: patent, 3D printing, funding for a health idea" autocomplete="off" enterkeyhint="search">
+      <kbd class="kbd" aria-hidden="true">/</kbd>
+    </form>
+    <p id="count" class="count" aria-live="polite"></p>
+  </div>
+</div>
+
+<main id="main">
+  <div class="wrap">
+    <div class="controls" id="controls">
+      <p id="hint" class="hint"><strong>How to use this guide.</strong> Pick a category, or open <em>Deadline</em> to see what closes soon. Every entry opens to plain steps for applying.</p>
+      <div id="tabs" class="tabs" role="tablist" aria-label="Category"></div>
+      <div class="filters">
+        <label class="f"><span class="f-l">Where</span><select id="f-loc"></select></label>
+        <label class="f"><span class="f-l">Your stage</span><select id="f-stage"></select></label>
+        <label class="f"><span class="f-l">How you apply</span><select id="f-method"></select></label>
+        <div class="f dd" id="dlWrap">
+          <span class="f-l" id="dlLabel">Deadline</span>
+          <button type="button" id="dlBtn" class="dd-btn" aria-expanded="false" aria-controls="dlPanel" aria-labelledby="dlLabel dlBtnVal"><span id="dlBtnVal">Any time</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
+          <div id="dlPanel" class="dd-panel" hidden>
+            <fieldset><legend class="vh">Deadline</legend><div id="dlOpts" class="opts"></div></fieldset>
+            <form id="dlRange" class="range">
+              <p class="range-h">Or pick a date range</p>
+              <div class="range-row">
+                <label><span>From</span><input type="date" id="dlFrom"></label>
+                <label><span>To</span><input type="date" id="dlTo"></label>
+              </div>
+              <button type="submit" class="btn btn--quiet btn--sm">Show this range</button>
+            </form>
+          </div>
+        </div>
+        <label class="f" id="sortWrap"><span class="f-l">Order</span>
+          <select id="sort">
+            <option value="guide">Guide order, by section</option>
+            <option value="deadline">Soonest deadline first</option>
+            <option value="name">Name, A to Z</option>
+          </select>
+        </label>
+      </div>
+      <div class="chips-row">
+        <div id="chips" class="chips"></div>
+        <button type="button" id="clearAll" class="link-btn" hidden>Clear all</button>
+      </div>
+    </div>
+
+    <section id="list-view" aria-label="Directory"><div id="list"></div></section>
+    <section id="cal-view" aria-label="Deadlines calendar" hidden><div id="cal"></div></section>
+    <section id="detail-view" hidden><div id="detail"></div></section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-title">Founders Field Guide</p>
+        <p>Started from the University&rsquo;s <a href="https://entrepreneurship.illinois.edu/about-our-ecosystem/entrepreneurship-ecosystem-map">Entrepreneurship Ecosystem Map</a>, then rewritten in plain English, dated, and expanded by the Founders: Illinois Entrepreneurs team.</p>
+      </div>
+      <div>
+        <p class="foot-h">The data</p>
+        <p>Last updated <span id="updated"></span>. <span id="footCounts"></span> Dates come only from official pages. When we could not confirm something, we left it blank and said so.</p>
+      </div>
+      <div>
+        <p class="foot-h">Help keep it right</p>
+        <p>Every entry has a &ldquo;Suggest a correction&rdquo; link. Know a resource we missed? <a id="suggestLink" href="#">Suggest a resource</a>. The data and code are on <a id="repoLink" href="#">GitHub</a>.</p>
+      </div>
+    </div>
+    <p class="foot-legal">Student-run project, not an official University of Illinois resource.</p>
+    <p class="foot-colophon">Set in Fraunces, Atkinson Hyperlegible, and IBM Plex Mono.</p>
+  </div>
+</footer>
+
+<script id="data" type="application/json">__DATA_JSON__</script>
+<script>
+__JS__
+</script>
+</body>
+</html>
