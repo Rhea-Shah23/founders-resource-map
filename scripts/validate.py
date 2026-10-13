@@ -28,7 +28,7 @@ TO_CONFIRM = ROOT / "notes" / "to_confirm.md"
 START, END = "<!-- AUTO-VALIDATION START -->", "<!-- AUTO-VALIDATION END -->"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from build import CATEGORIES, FIELDS  # noqa: E402
+from build import APPLICATION_METHODS, CATEGORIES, DEADLINE_TYPES, FIELDS  # noqa: E402
 
 ALLOWED = {
     "location": {"UIUC", "CU", "Chicago", "National", "Online"},
@@ -40,6 +40,8 @@ ALLOWED = {
     "confidence": {"High", "Medium", "Low"},
     "needs_confirmation": {"TRUE", "FALSE"},
     "category": set(CATEGORIES),
+    "application_method": set(APPLICATION_METHODS),
+    "deadline_type": set(DEADLINE_TYPES),
 }
 TAGS = set("""funding non-dilutive equity prizes pitching competition accelerator incubator
 mentorship workspace maker-space prototyping coursework certificate degree design-thinking
@@ -47,11 +49,14 @@ workshops events networking community housing fellowship internships careers con
 legal-ip licensing research-commercialization sbir customer-discovery deep-tech health agtech
 quantum social-impact software hardware women chicago travel faculty-researchers grad-students
 undergrads""".split())
-REQUIRED = ["id", "name", "description", "good_for", "category", "location", "tags", "stage",
-            "status", "recurrence", "student_eligible", "on_university_map", "last_verified",
-            "confidence", "needs_confirmation"]
-USER_FACING = ["name", "description", "good_for", "subcategory", "parent_org",
-               "ideal_participant", "deadline_note", "cost_or_funding", "notes"]
+REQUIRED = ["id", "name", "tagline", "description", "what_it_is", "who_should_apply",
+            "choose_this_if", "good_for", "category", "location", "tags", "stage",
+            "application_method", "status", "recurrence", "deadline_type", "student_eligible",
+            "on_university_map", "last_verified", "confidence", "needs_confirmation"]
+USER_FACING = ["name", "tagline", "description", "what_it_is", "who_should_apply",
+               "choose_this_if", "good_for", "subcategory", "parent_org", "ideal_participant",
+               "apply_steps", "deadline_note", "cost_or_funding", "notes"]
+URL = re.compile(r"^https?://[^\s;|]+$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 EMAIL = re.compile(r"^[^@\s]+@[^@\s]+\.[a-z]{2,}$", re.I)
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -98,12 +103,20 @@ def check_rows(rows):
         if lv and not parse_iso(lv):
             errors.append(f"{where}: last_verified {lv!r} is not an ISO date")
         nd = r.get("next_deadline", "")
+        d = parse_iso(nd) if nd else None
         if nd:
-            d = parse_iso(nd)
             if not d:
                 errors.append(f"{where}: next_deadline {nd!r} is not an ISO date")
             elif d < today:
                 warnings.append(f"{where}: next_deadline {nd} has passed. Update or clear it")
+        od = r.get("opens_date", "")
+        if od:
+            o = parse_iso(od)
+            if not o:
+                errors.append(f"{where}: opens_date {od!r} is not an ISO date")
+            elif d and o > d:
+                errors.append(f"{where}: opens_date {od} is after next_deadline {nd}")
+        errors += [f"{where}: {m}" for m in check_round2(r)]
         email = r.get("contact_email", "")
         if email and not EMAIL.match(email):
             errors.append(f"{where}: contact_email {email!r} looks malformed")
@@ -114,6 +127,10 @@ def check_rows(rows):
         sentences = len(re.findall(r"[.!?](\s|$)", desc))
         if sentences > 2 or len(desc) > 320:
             warnings.append(f"{where}: description is longer than 2 sentences or 320 characters")
+        if (r.get("application_method") not in ("", "Unknown", "Not applicable",
+                                                 "Walk-in or open access")
+                and not r.get("apply_steps")):
+            warnings.append(f"{where}: no apply_steps (only add them from an official page)")
         if r.get("confidence") != "High" and r.get("needs_confirmation") != "TRUE":
             errors.append(f"{where}: confidence is not High but needs_confirmation is FALSE")
         if not r.get("url"):
@@ -121,6 +138,60 @@ def check_rows(rows):
         if r.get("status") == "Active" and not r.get("source_urls"):
             errors.append(f"{where}: status is Active but no evidence in source_urls")
     return errors, warnings
+
+
+def check_round2(r):
+    """Rules for the round 2 fields (tagline, summary rows, how to apply, deadline type)."""
+    out = []
+    tagline = r.get("tagline", "")
+    if len(tagline) > 90:
+        out.append(f"tagline is {len(tagline)} characters (max 90)")
+    if tagline.endswith("."):
+        out.append("tagline should not end with a period")
+    cti = r.get("choose_this_if", "")
+    if cti and not (cti.startswith("You want to") or cti.startswith("You are")):
+        out.append('choose_this_if must start with "You want to" or "You are"')
+    for f in ("what_it_is", "who_should_apply", "choose_this_if"):
+        v = r.get(f, "")
+        if v and len(re.findall(r"[.!?](\s|$)", v)) > 1:
+            out.append(f"`{f}` should be one sentence")
+    for f in USER_FACING:
+        if "!" in r.get(f, ""):
+            out.append(f"`{f}` contains an exclamation point")
+    steps = [s for s in r.get("apply_steps", "").split("|")]
+    if r.get("apply_steps", ""):
+        if len(steps) > 3:
+            out.append(f"apply_steps has {len(steps)} steps (max 3)")
+        if any(not s.strip() for s in steps) or not re.fullmatch(r"[^|]+( \| [^|]+)*",
+                                                                 r["apply_steps"]):
+            out.append('apply_steps must be separated by " | " with no empty steps')
+        if r.get("application_method") in ("Unknown", "Not applicable"):
+            out.append("apply_steps is set but application_method is Unknown or Not applicable")
+    au = r.get("apply_url", "")
+    if au and not URL.match(au):
+        out.append(f"apply_url {au!r} is not a single http(s) URL")
+    if au and au == r.get("url"):
+        out.append("apply_url repeats url; leave it blank")
+    dt, nd = r.get("deadline_type", ""), r.get("next_deadline", "")
+    if dt == "Confirmed":
+        if not nd:
+            out.append("deadline_type is Confirmed but next_deadline is blank")
+        if not r.get("source_urls"):
+            out.append("deadline_type is Confirmed but source_urls is blank")
+    elif dt == "Typical":
+        if not r.get("deadline_note"):
+            out.append("deadline_type is Typical but deadline_note has no evidence")
+    elif nd and dt:
+        out.append(f"next_deadline is set but deadline_type is {dt} (use Confirmed or Typical)")
+    needs = r.get("needs_confirmation") == "TRUE"
+    if not needs:
+        if r.get("application_method") == "Unknown":
+            out.append("application_method is Unknown but needs_confirmation is FALSE")
+        if dt == "Unknown":
+            out.append("deadline_type is Unknown but needs_confirmation is FALSE")
+        if dt == "Typical":
+            out.append("deadline_type is Typical but needs_confirmation is FALSE")
+    return out
 
 
 def ssl_context():
@@ -186,7 +257,7 @@ def _fetch(url):
 def check_urls(rows):
     targets = {}
     for r in rows:
-        for field in ("url", "source_urls"):
+        for field in ("url", "apply_url", "source_urls"):
             for u in [u.strip() for u in r.get(field, "").split(";") if u.strip()]:
                 targets.setdefault(u, []).append((r["id"], field))
     with ThreadPoolExecutor(max_workers=12) as pool:

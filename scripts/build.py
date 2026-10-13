@@ -21,12 +21,19 @@ TEMPLATE = ROOT / "scripts" / "site_template.html"
 SITE = ROOT / "docs" / "index.html"
 
 FIELDS = [
-    "id", "name", "description", "good_for", "category", "subcategory", "parent_org",
-    "location", "tags", "ideal_participant", "stage", "url", "contact_email", "status",
-    "recurrence", "next_deadline", "deadline_note", "cost_or_funding", "student_eligible",
-    "on_university_map", "source_urls", "last_verified", "confidence",
-    "needs_confirmation", "notes",
+    "id", "name", "tagline", "description", "what_it_is", "who_should_apply", "choose_this_if",
+    "good_for", "category", "subcategory", "parent_org", "location", "tags",
+    "ideal_participant", "stage", "url", "contact_email", "application_method", "apply_steps",
+    "apply_url", "status", "recurrence", "opens_date", "next_deadline", "deadline_type",
+    "deadline_note", "cost_or_funding", "student_eligible", "on_university_map", "source_urls",
+    "last_verified", "confidence", "needs_confirmation", "notes",
 ]
+
+APPLICATION_METHODS = [
+    "Online form", "Email", "Pitch submission", "Info session or event", "Course registration",
+    "Contact staff", "Walk-in or open access", "Not applicable", "Unknown",
+]
+DEADLINE_TYPES = ["Confirmed", "Typical", "Rolling", "None published", "Unknown"]
 
 # Tab order on the site. Must match notes/taxonomy.md.
 CATEGORIES = [
@@ -60,6 +67,7 @@ def load_resources():
         item = OrderedDict((k, (r.get(k) or "").strip()) for k in FIELDS)
         item["tags"] = split_list(item["tags"])
         item["source_urls"] = split_list(item["source_urls"])
+        item["apply_steps"] = [s.strip() for s in item["apply_steps"].split("|") if s.strip()]
         item["on_university_map"] = to_bool(item["on_university_map"])
         item["needs_confirmation"] = to_bool(item["needs_confirmation"])
         out.append(item)
@@ -88,6 +96,8 @@ def main():
         ("map_entry_count", map_count),
         ("resource_count", len(resources)),
         ("categories", CATEGORIES),
+        ("application_methods", APPLICATION_METHODS),
+        ("deadline_types", DEADLINE_TYPES),
         ("resources", resources),
     ])
     JSON_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
