@@ -240,6 +240,7 @@ function validIcs({ text, lines }, n, label) {
   await page.goto(base + "#/calendar");
   await page.waitForSelector(".cal-grid");
   await page.evaluate(() => document.querySelector(".controls").scrollIntoView());
+  await page.waitForTimeout(600);
   await page.screenshot({ path: path.join(shots, "desktop-calendar.png") });
   await page.goto(base + "#/resource/cozad-new-venture-challenge");
   await page.waitForSelector(".d-title");
@@ -257,6 +258,7 @@ function validIcs({ text, lines }, n, label) {
     if (hash === "#/calendar") {
       check(!(await m.isVisible(".cal-grid")) && (await m.isVisible(".agenda")), "phone calendar shows the agenda list only");
       await m.evaluate(() => document.querySelector(".cal-top").scrollIntoView());
+      await m.waitForTimeout(400);
     }
     await m.screenshot({ path: path.join(shots, name) });
   }
