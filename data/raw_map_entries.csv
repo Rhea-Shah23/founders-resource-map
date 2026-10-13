@@ -2,8 +2,8 @@ raw_id,section_path,entry_as_listed,entry_type,canonical_id,note
 map-001,Overview > Internal Partners,Grainger Engineering,list item,grainger-engineering,
 map-002,Overview > Internal Partners,City Scholars & Startup City Scholars,list item,city-scholars,
 map-003,Overview > Internal Partners,Discovery Partners Institute,list item,discovery-partners-institute,
-map-004,Overview > Internal Partners,Chicago Innovation Exchange (CIE) & Illinois Partnership,list item,chicago-innovation-exchange,
-map-005,Overview > Internal Partners,Quantum Accelerator,list item,duality-quantum-accelerator,
+map-004,Overview > Internal Partners,Chicago Innovation Exchange (CIE) & Illinois Partnership,list item,polsky-center,Merged into Polsky Center: CIE became part of UChicago's Polsky Center in 2016 (now Polsky Exchange)
+map-005,Overview > Internal Partners,Quantum Accelerator,list item,duality-quantum-accelerator,Same program as Duality Quantum Accelerator
 map-006,Overview > Internal Partners,Siebel Center for Design,list item,siebel-center-for-design,
 map-007,Overview > Internal Partners,Landuyt Center for Entrepreneurship (Formerly TEC),list item,landuyt-center,
 map-008,Overview > Internal Partners,Gies Business,list item,gies-business,
@@ -53,9 +53,9 @@ map-051,OVCRI > Research Park,Entrepreneurship Workshops,list item,research-park
 map-052,OVCRI > Research Park,Illinois Reboot Tech Training,list item,illinois-reboot,
 map-053,OVCRI > Research Park,Recruitment Services,list item,research-park-recruitment-services,
 map-054,OVCRI > Research Park,Workforce Development,list item,research-park-workforce-development,
-map-055,Illinois Ventures,Venture Capital & Seed Funding for tech startups from the University of Illinois System,list item,illinois-ventures,
-map-056,Illinois Ventures,Evergreen Fund,list item,illinois-ventures-evergreen-fund,
-map-057,Office of Technology Management,Disclosure & Licensing Information,list item,office-of-technology-management,
+map-055,Illinois Ventures,Venture Capital & Seed Funding for tech startups from the University of Illinois System,list item,illinois-ventures,Core service of Illinois Ventures
+map-056,Illinois Ventures,Evergreen Fund,list item,illinois-ventures,Merged into Illinois Ventures: no official page found for an Evergreen Fund (see to_confirm.md)
+map-057,Office of Technology Management,Disclosure & Licensing Information,list item,office-of-technology-management,Core service of the Office of Technology Management
 map-058,Office of Technology Management,Illinois Proof of Concept Program (IPOC),list item,ipoc,
 map-059,Carle Illinois College of Medicine,Health Make-A-Thon,list item,health-make-a-thon,
 map-060,Carle Illinois College of Medicine,Health Maker Lab,list item,health-maker-lab,
@@ -76,7 +76,7 @@ map-074,Grainger > Landuyt Center,Silicon Valley Entrepreneurship Workshop,list 
 map-075,Grainger > Landuyt Center,SocialFuse,list item,socialfuse,
 map-076,Grainger > Landuyt Center,Startup City Scholars (Landuyt Center & Grainger Engineering),list item,city-scholars,
 map-077,Grainger > Health Care Engineering Systems Center,Jump ARCHES (with OSF Healthcare and University of Illinois College of Medicine - Peoria),list item,jump-arches,
-map-078,Grainger > Other Grainger & University Partners,Office of the Associate Dean for Innovation & Entrepreneurship,list item,grainger-associate-dean-ie,
+map-078,Grainger > Other Grainger & University Partners,Office of the Associate Dean for Innovation & Entrepreneurship,list item,landuyt-center,"Merged into Landuyt Center: the role is now an Assistant Dean held by the Landuyt director, with no separate office page"
 map-079,Grainger > Other Grainger & University Partners,"City Scholars & Startup City Scholars (Grainger, UIC, DPI, UChicago, Polsky)",list item,city-scholars,
 map-080,Grainger > Other Grainger & University Partners,ECE Open Lab (ECE),list item,ece-open-lab,
 map-081,Grainger > Other Grainger & University Partners,"IDEA Lab: Innovation, Discovery, Design, & Data Lab (Grainger Engineering Library)",list item,idea-lab,
@@ -108,7 +108,7 @@ map-106,External Partners & Programs > Urbana-Champaign,Champaign-Urbana CEO Rou
 map-107,External Partners & Programs > Urbana-Champaign,"Illinois Ag Tech Accelerator (gener8tor, Serra Ventures, Research Park)",list item,illinois-ag-tech-accelerator,
 map-108,External Partners & Programs > Urbana-Champaign,"Innovation Celebration (Champaign County EDC, Landuyt Center, & Parkland College)",list item,innovation-celebration,
 map-109,External Partners & Programs > Urbana-Champaign,Pygmalion Tech Festival,list item,pygmalion,
-map-110,External Partners & Programs > Chicago,Chicago Innovation Exchange (CIE) & Illinois Partnership,list item,chicago-innovation-exchange,
+map-110,External Partners & Programs > Chicago,Chicago Innovation Exchange (CIE) & Illinois Partnership,list item,polsky-center,Merged into Polsky Center: CIE became part of UChicago's Polsky Center in 2016 (now Polsky Exchange)
 map-111,External Partners & Programs > Chicago,Chicago Quantum Exchange (CQE),list item,chicago-quantum-exchange,
 map-112,External Partners & Programs > Chicago,"City Scholars & Startup City Scholars (Grainger, UIC, DPI, UChicago, Polsky)",list item,city-scholars,
 map-113,External Partners & Programs > Chicago,Discovery Partners Institute (DPI),list item,discovery-partners-institute,

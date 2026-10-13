@@ -58,7 +58,7 @@ CANONICAL = {
     "Grainger Engineering": "grainger-engineering",
     "City Scholars & Startup City Scholars": "city-scholars",
     "Discovery Partners Institute": "discovery-partners-institute",
-    "Chicago Innovation Exchange (CIE) & Illinois Partnership": "chicago-innovation-exchange",
+    "Chicago Innovation Exchange (CIE) & Illinois Partnership": "polsky-center",
     "Quantum Accelerator": "duality-quantum-accelerator",
     "Siebel Center for Design": "siebel-center-for-design",
     "Landuyt Center for Entrepreneurship (Formerly TEC)": "landuyt-center",
@@ -125,7 +125,7 @@ CANONICAL = {
     "Workforce Development": "research-park-workforce-development",
     # Illinois Ventures
     "Venture Capital & Seed Funding for tech startups from the University of Illinois System": "illinois-ventures",
-    "Evergreen Fund": "illinois-ventures-evergreen-fund",
+    "Evergreen Fund": "illinois-ventures",
     # OTM
     "Disclosure & Licensing Information": "office-of-technology-management",
     "Illinois Proof of Concept Program (IPOC)": "ipoc",
@@ -149,7 +149,7 @@ CANONICAL = {
     "SocialFuse": "socialfuse",
     "Startup City Scholars (Landuyt Center & Grainger Engineering)": "city-scholars",
     # Other Grainger and university partners
-    "Office of the Associate Dean for Innovation & Entrepreneurship": "grainger-associate-dean-ie",
+    "Office of the Associate Dean for Innovation & Entrepreneurship": "landuyt-center",
     "City Scholars & Startup City Scholars (Grainger, UIC, DPI, UChicago, Polsky)": "city-scholars",
     "ECE Open Lab (ECE)": "ece-open-lab",
     "IDEA Lab: Innovation, Discovery, Design, & Data Lab (Grainger Engineering Library)": "idea-lab",
@@ -185,6 +185,20 @@ CANONICAL = {
     "ThinkChicago (City of Chicago, World Business Chicago, UI System, Landuyt Center, City Colleges of Chicago)": "thinkchicago",
     "Polsky Center for Entrepreneurship & Innovation at UChicago": "polsky-center",
     "University of Illinois – Chicago (UIC)": "uic",
+}
+
+# Why some entries were merged into a differently named canonical resource.
+MERGE_NOTES = {
+    "Office of the Associate Dean for Innovation & Entrepreneurship":
+        "Merged into Landuyt Center: the role is now an Assistant Dean held by the Landuyt director, with no separate office page",
+    "Evergreen Fund":
+        "Merged into Illinois Ventures: no official page found for an Evergreen Fund (see to_confirm.md)",
+    "Chicago Innovation Exchange (CIE) & Illinois Partnership":
+        "Merged into Polsky Center: CIE became part of UChicago's Polsky Center in 2016 (now Polsky Exchange)",
+    "Disclosure & Licensing Information": "Core service of the Office of Technology Management",
+    "Venture Capital & Seed Funding for tech startups from the University of Illinois System":
+        "Core service of Illinois Ventures",
+    "Quantum Accelerator": "Same program as Duality Quantum Accelerator",
 }
 
 # Headings that are themselves entries when no list follows them.
@@ -287,7 +301,7 @@ def extract(html):
         if key not in CANONICAL:
             sys.exit(f"Unmapped entry: {key!r} in {r['section_path']}")
         r["canonical_id"] = CANONICAL[key]
-        r["note"] = "" if r["canonical_id"] else "Section pointer, not a standalone resource"
+        r["note"] = MERGE_NOTES.get(key, "") if r["canonical_id"] else "Section pointer, not a standalone resource"
     return rows
 
 
