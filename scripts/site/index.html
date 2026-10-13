@@ -19,17 +19,21 @@ __CSS__
 <header class="mast">
   <div class="wrap">
     <div class="mast-bar">
-      <span class="mast-org">Founders: Illinois Entrepreneurs</span>
+      <a class="mast-org" href="#/">Founders: Illinois Entrepreneurs</a>
       <span class="mast-ed">Field Guide <span class="sep">/</span> Fall 2026 edition</span>
     </div>
+    <div class="mast-main">
+    <div class="mast-intro">
     <h1 class="mast-title">Every entrepreneurship resource at Illinois, in one guide.</h1>
     <p class="mast-lede">Competitions, funding, labs, clubs, and offices, each with who it is for, how to apply, and when it closes. Kept by students, checked against official pages.</p>
+    </div>
     <dl class="mast-stats">
       <div><dt>Resources</dt><dd id="statResources">101</dd></div>
       <div><dt>University map entries</dt><dd id="statMap">127</dd></div>
       <div><dt>Added by Founders</dt><dd id="statAdded">8</dd></div>
       <div><dt>Confirmed dates ahead</dt><dd id="statDated">0</dd></div>
     </dl>
+    </div>
     <div class="season" aria-label="Season strip: dated deadlines across the academic year">
       <div id="strip" class="strip"></div>
       <p id="stripCap" class="strip-cap"></p>
@@ -58,7 +62,11 @@ __CSS__
     <div class="controls" id="controls">
       <p id="hint" class="hint"><strong>How to use this guide.</strong> Pick a category, or open <em>Deadline</em> to see what closes soon. Every entry opens to plain steps for applying.</p>
       <div id="tabs" class="tabs" role="tablist" aria-label="Category"></div>
-      <div class="filters">
+      <button type="button" id="filtersToggle" class="filters-toggle" aria-expanded="false" aria-controls="filters">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
+        <span>Filters</span><span id="filtersN" class="filters-n"></span>
+      </button>
+      <div class="filters" id="filters">
         <label class="f"><span class="f-l">Where</span><select id="f-loc"></select></label>
         <label class="f"><span class="f-l">Your stage</span><select id="f-stage"></select></label>
         <label class="f"><span class="f-l">How you apply</span><select id="f-method"></select></label>

@@ -371,6 +371,8 @@
         esc(c[1]) + icon("x") + "</button>";
     }).join("");
     $("#clearAll").hidden = !chips.length;
+    var nf = ["loc", "stage", "method", "dl"].filter(function (k) { return state[k]; }).length;
+    $("#filtersN").textContent = nf ? String(nf) : "";
   }
 
   /* ---------- Directory ---------- */
@@ -641,7 +643,7 @@
       dateBlock = '<p class="kd-big kd-big--none"><span class="kd-kind">' + typeMark(t) + esc(TYPE_TEXT[t] || t) + "</span></p>";
     }
     var dates = '<dl class="kv-list">' +
-      row("Type", esc(TYPE_TEXT[t] || t)) +
+      row("Type", r.dl ? esc(TYPE_TEXT[t] || t) : "") +
       row("Opens", r.opens ? fmt(r.opens) : "") +
       row("Last closed", r.last ? fmt(r.last) : "") +
       row("Repeats", r.recurrence && r.recurrence !== "Unknown" ? esc(r.recurrence) : "") + "</dl>" +
@@ -806,6 +808,12 @@
       j = (j + tabs.length) % tabs.length;
       setFilters({ cat: tabs[j].getAttribute("data-cat") });
       $$(".tab")[j].focus();
+    });
+
+    $("#filtersToggle").addEventListener("click", function (e) {
+      var open = !$("#controls").classList.contains("is-open");
+      $("#controls").classList.toggle("is-open", open);
+      e.currentTarget.setAttribute("aria-expanded", String(open));
     });
 
     // Deadline menu
